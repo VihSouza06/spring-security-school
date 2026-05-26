@@ -17,6 +17,10 @@ public class EstudanteService {
     }
 
     public EstudanteModel criarEstudante(EstudanteModel estudanteModel){
+        if (estudanteRepository.existsByNome(estudanteModel.getNome())) {
+            throw new RuntimeException("Já existe um estudante com esse nome.");
+        }
+
         return estudanteRepository.save(estudanteModel);
     }
 
