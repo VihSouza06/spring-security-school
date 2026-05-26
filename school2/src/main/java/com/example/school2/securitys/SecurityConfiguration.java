@@ -20,7 +20,8 @@ public class SecurityConfiguration {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/estudantes").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/estudantes").permitAll())
+                        .requestMatchers(HttpMethod.POST, "/estudantes").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/estudantes/**").permitAll())
                 .build();
     }
 
