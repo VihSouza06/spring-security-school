@@ -3,12 +3,15 @@ package com.example.school2.services;
 import com.example.school2.models.EstudanteModel;
 import com.example.school2.repositories.EstudanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EstudanteService {
+public class EstudanteService implements UserDetailsService {
     @Autowired
     private EstudanteRepository estudanteRepository;
 
@@ -36,7 +39,11 @@ public class EstudanteService {
         EstudanteModel novoEstudante = estudanteRepository.findById(id).get();
         novoEstudante.setNome(estudanteModel.getNome());
         novoEstudante.setEmail(estudanteModel.getEmail());
-        novoEstudante.setIdade(estudanteModel.getIdade());
         return estudanteRepository.save(novoEstudante);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return estudanteRepository.findByLogin(username);
     }
 }

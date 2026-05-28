@@ -21,7 +21,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/estudantes").permitAll()
                         .requestMatchers(HttpMethod.POST, "/estudantes").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/estudantes/**").permitAll())
+                        .requestMatchers(HttpMethod.DELETE, "/estudantes/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/estudantes").permitAll())
                 .build();
     }
 
