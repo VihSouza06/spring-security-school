@@ -1,11 +1,11 @@
 package com.example.school2.models;
 
-import com.example.school2.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity(name ="Estudantes")
 @Table(name = "TBL_ESTUDANTES")
@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 public class EstudanteModel  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     @Column (name = "nome_estudante")
     private String nome;
+
     @Column (name = "email_estudante")
     private String email;
 
-    @CreationTimestamp
-    private LocalDateTime dataMatricula;
-
+    /*@CreationTimestamp
+    private LocalDateTime dataMatricula;*/
 
 }

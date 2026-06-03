@@ -9,9 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
-public class EstudanteService implements UserDetailsService {
+public class EstudanteService{
+
     @Autowired
     private EstudanteRepository estudanteRepository;
 
@@ -27,23 +29,19 @@ public class EstudanteService implements UserDetailsService {
         return estudanteRepository.save(estudanteModel);
     }
 
-    public void deletarEstudante(Long id){
+    public void deletarEstudante(UUID id){
         estudanteRepository.deleteById(id);
     }
 
-    public EstudanteModel buscarEstudante(Long id){
+    public EstudanteModel buscarEstudante(UUID id){
         return estudanteRepository.findById(id).get();
     }
 
-    public EstudanteModel atualizarEstudante(EstudanteModel estudanteModel, Long id){
+    public EstudanteModel atualizarEstudante(EstudanteModel estudanteModel, UUID id){
         EstudanteModel novoEstudante = estudanteRepository.findById(id).get();
         novoEstudante.setNome(estudanteModel.getNome());
         novoEstudante.setEmail(estudanteModel.getEmail());
         return estudanteRepository.save(novoEstudante);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return estudanteRepository.findByLogin(username);
-    }
 }

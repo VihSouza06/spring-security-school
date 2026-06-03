@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/estudantes")
@@ -24,7 +25,7 @@ public class EstudanteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EstudanteModel> buscarEstudante(@PathVariable Long id){
+    public ResponseEntity<EstudanteModel> buscarEstudante(@PathVariable UUID id){
         EstudanteModel estudante = estudanteService.buscarEstudante(id);
         return ResponseEntity.ok(estudante);
     }
@@ -38,14 +39,14 @@ public class EstudanteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarEstudante(@PathVariable Long id){
+    public ResponseEntity<?> deletarEstudante(@PathVariable UUID id){
         estudanteService.deletarEstudante(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EstudanteModel> atualizarEstudante
-            (@PathVariable Long id, @RequestBody EstudanteModel estudanteModel){
+            (@PathVariable UUID id, @RequestBody EstudanteModel estudanteModel){
         EstudanteModel estudanteAtualizado = estudanteService.atualizarEstudante(estudanteModel, id);
         return ResponseEntity.ok(estudanteAtualizado);
     }
